@@ -1,0 +1,13 @@
+---
+- name: Update packages
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Update packages
+    package:
+      name: "*"
+      state: latest
+    register: updatedstuff
+  - name: Reboot when stuff was done
+    reboot:
+    when: updatedstuff.changed
